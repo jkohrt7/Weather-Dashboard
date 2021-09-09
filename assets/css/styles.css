@@ -1,0 +1,76 @@
+/* Global Styles */
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+:root {
+    --main-color: navy;
+    --secondary-color: lime;
+}
+
+/* Header Styles */
+.header {
+    display: flex; 
+    flex-direction: column;
+    border: solid red 3px;
+    
+}
+
+/* Top half of header */
+.primary-content {
+    display: flex;
+    border: solid green 3px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+#title {
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+#search-content input {
+    font-size: 120%;
+}
+
+/* bottom half of header */
+
+.city-history {
+    display: flex;
+    padding-left: 1em;
+    border: solid orange 3px;
+}
+
+.city-history ::after {
+    content: "|";
+    padding: 1em;
+}
+
+/* Main content */
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+#city-weather-container {
+    border: 1px purple solid;
+    padding: 1em
+}
+
+#current-weather-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+#current-data {
+    flex-grow: 1;
+}
+
+#forecast-container {
+    display: flex;
+    justify-content: space-between;
+}

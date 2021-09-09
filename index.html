@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Styles-->
+    <link rel = "stylesheet" href = "assets/css/reset.css">
+    <link rel = "stylesheet" href = 'assets/css/styles.css'>
+    <!--External fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">    
+
+    <title>Document</title>
+</head>
+
+
+<body>
+    <header>
+        <div class = "primary-content">
+            <div id = "title">Weather App</div>
+            <div id = "search-content">
+                <input type = "text" id = "searchbar" placeholder = "Search for a City"></input>
+                <button type = "submit"></button>
+            </div>
+
+            <!--Should be a mobile-style button when smaller-->
+            <nav id = "extra-links">
+                <a>Github</a>
+            </nav>
+            
+        </div>
+
+        <ul class = "city-history">
+            <!--Dynamically added li that complete a search on click-->
+            <li>One</li>
+            <li>Two</li>
+        </ul>
+    </header>
+
+    <main>
+        <div id = "city-weather-container">
+            <h1 id = "city-name">DYNAMIC CITY NAME</h1>
+            <div id = "current-weather-container">
+                <div id = "current-data">One</div>
+                <div id = "current-icon">Two</div>
+            </div>
+
+            <h2>5-day Forecast</h2>
+            <ul id = "forecast-container">
+                <!--Dynamically added li elements; placeholder for now-->
+                <li>One</li>
+                <li>Two</li>
+            </ul>
+
+        </div>
+    </main>
+</body>
+</html>
