@@ -34,12 +34,3 @@ let getWeatherData = function(cityName) {
     })
 }
 
-//should probably go in the main script.
-//Adds curr weather data from a weather response to the daily weather element
-let appendCurrentWeather = function(weatherResponse) {
-    let forecastArr = weatherResponse.current;
-}
-
-getWeatherData("Atlanta").then(function(response){
-    console.log(response)
-} )
