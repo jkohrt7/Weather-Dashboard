@@ -31,8 +31,25 @@ body {
     font-size: xx-large;
 }
 
+#search-content {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
 #search-content input {
     font-size: 120%;
+}
+
+#search-button {
+    height: 28px;
+    width: 28px;
+    background-image: url("../images/search.png");
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid black;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 /* bottom half of header */
