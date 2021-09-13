@@ -6,7 +6,7 @@ let searchBar = document.querySelector("#search-bar")
 
 
 //Uses local storage to populate bar with recent cities
-let renderSearchedCities
+let renderSearchedCities;
 
 //Adds curr weather data from a weather response to the daily weather element
 let renderCurrentWeather = function() {
@@ -17,6 +17,7 @@ let renderCurrentWeather = function() {
 
     //add city name at top of container
     let city = searchBar.value;
+    city = city.substring(0,1).toUpperCase() + city.substring(1);
     cityNameElement.textContent = city;
 
     //add data to container
@@ -73,20 +74,25 @@ let renderFiveDayForecast = function () {
         let icon;
         let dayNode;
 
-        for(let i = 0; i < forecastArray.length; i++) {
+        for(let i = 0; i < forecastArray.length - 3; i++) {
             
             highTemp = forecastArray[i].temp.max;
             lowTemp = forecastArray[i].temp.min;
             wind = forecastArray[i].wind_speed;
             humidity = forecastArray[i].humidity;
             icon = forecastArray[i].weather[0].icon;
+            date = forecastArray[i].dt;
 
-            dayNode = document.createElement("DIV");
+            dayNode = document.createElement("h4");
 
             //TODO add date
+            let node = document.createElement("h4");
+            let textnode = document.createTextNode(unixToDateTime(date).toLocaleString({weekday: 'long'}));
+            node.appendChild(textnode);
+            dayNode.appendChild(node);
             
             //add icon
-            let node  = document.createElement("IMG");
+            node  = document.createElement("IMG");
             node.src =  "http://openweathermap.org/img/wn/" + icon + "@2x.png";
             dayNode.appendChild(node);
 
@@ -104,7 +110,7 @@ let renderFiveDayForecast = function () {
 
             //add wind
             node = document.createElement("P");
-            textnode = document.createTextNode("Wind: " + wind);
+            textnode = document.createTextNode("Wind: " + wind + " MPH");
             node.appendChild(textnode);
             dayNode.appendChild(node);
 
@@ -127,3 +133,24 @@ let renderAllWeather = function() {
 searchButton.addEventListener("click", renderAllWeather);
 searchBar.addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderAllWeather()})
 
+//Date functions
+let unixToDateTime = function(timestamp) {
+    let timeInMilliseconds = timestamp * 1000;
+    let isoDate = new Date(timeInMilliseconds).toJSON();
+    return luxon.DateTime.fromISO(isoDate);
+}
+
+let renderDate = function() {
+    let node = document.createElement("DIV")
+    let textNode = document.createTextNode(luxon.DateTime.now().toLocaleString(luxon.DateTime.DATE_HUGE))
+    node.appendChild(textNode);
+    
+    let dateContainer = document.querySelector("#date-container");
+    dateContainer.appendChild(node);
+}
+
+let init = function() {
+    renderDate();
+}
+
+init();
