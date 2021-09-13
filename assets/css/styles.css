@@ -1,6 +1,7 @@
 /* Global Styles */
 body {
     font-family: 'Ubuntu', sans-serif;
+    line-height: 120%;
 }
 
 :root {
@@ -77,6 +78,7 @@ main {
 }
 
 #current-weather-container {
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -84,6 +86,10 @@ main {
 }
 
 #current-data {
+    margin: 10px;
+}
+
+#current-icon {
     flex-grow: 1;
 }
 

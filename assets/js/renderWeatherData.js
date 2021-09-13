@@ -9,7 +9,7 @@ let searchBar = document.querySelector("#search-bar")
 let renderSearchedCities
 
 //Adds curr weather data from a weather response to the daily weather element
-let renderCurrentWeather = function(weatherResponse) {
+let renderCurrentWeather = function() {
     let dataContainer = document.querySelector("#current-data");
     let imageContainer = document.querySelector("#current-icon")
     dataContainer.innerHTML = ""; 
@@ -57,9 +57,73 @@ let renderCurrentWeather = function(weatherResponse) {
         
     } )
 
-    
 }
 
-searchButton.addEventListener("click", renderCurrentWeather);
-searchBar.addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderCurrentWeather()})
+let renderFiveDayForecast = function () {
+    let forecastContainer = document.querySelector("#forecast-container");
+    forecastContainer.innerHTML = "";
+
+    let city = searchBar.value;
+    getWeatherData(city).then(function (response) {
+        let forecastArray = response.daily;
+        let highTemp;
+        let lowTemp;
+        let wind;
+        let humidity;
+        let icon;
+        let dayNode;
+
+        for(let i = 0; i < forecastArray.length; i++) {
+            
+            highTemp = forecastArray[i].temp.max;
+            lowTemp = forecastArray[i].temp.min;
+            wind = forecastArray[i].wind_speed;
+            humidity = forecastArray[i].humidity;
+            icon = forecastArray[i].weather[0].icon;
+
+            dayNode = document.createElement("DIV");
+
+            //TODO add date
+            
+            //add icon
+            let node  = document.createElement("IMG");
+            node.src =  "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+            dayNode.appendChild(node);
+
+            //add High Temp
+            node = document.createElement("P");
+            textnode = document.createTextNode("High: " + Math.floor(highTemp) + " °F");
+            node.appendChild(textnode);
+            dayNode.appendChild(node);
+
+            //Add low temp
+            node = document.createElement("P");
+            textnode = document.createTextNode("Low: " + Math.floor(lowTemp) + " °F");
+            node.appendChild(textnode);
+            dayNode.appendChild(node);
+
+            //add wind
+            node = document.createElement("P");
+            textnode = document.createTextNode("Wind: " + wind);
+            node.appendChild(textnode);
+            dayNode.appendChild(node);
+
+            //add humidity
+            node = document.createElement("P");
+            textnode = document.createTextNode("Humidity: " + humidity + "%");
+            node.appendChild(textnode);
+            dayNode.appendChild(node);
+
+            forecastContainer.appendChild(dayNode);
+        }
+    })
+}
+
+let renderAllWeather = function() {
+    renderCurrentWeather();
+    renderFiveDayForecast();
+}
+
+searchButton.addEventListener("click", renderAllWeather);
+searchBar.addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderAllWeather()})
 
