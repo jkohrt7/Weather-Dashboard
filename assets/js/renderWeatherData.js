@@ -6,7 +6,18 @@ let searchBar = document.querySelector("#search-bar")
 
 
 //Uses local storage to populate bar with recent cities
-let renderSearchedCities;
+let renderSearchedCities = function() {
+    //get cities from localStorage into an array.
+
+    //loop through the cities
+
+    //add them as new li to .city-history
+};
+
+//Adds a city to local storage
+let addCityToLocalStorage = function() {
+    //
+}
 
 //Adds curr weather data from a weather response to the daily weather element
 let renderCurrentWeather = function() {
@@ -22,16 +33,13 @@ let renderCurrentWeather = function() {
 
     //add data to container
     getWeatherData(city).then(function(response){
-        console.log(response)
-        temp = response.current.temp;
-        wind = response.current.wind_speed;
-        humidity = response.current.humidity;
-        icon = response.current.weather[0].icon;
+        console.log(response);
+        let temp = response.current.temp;
+        let wind = response.current.wind_speed;
+        let humidity = response.current.humidity;
+        let icon = response.current.weather[0].icon;
+        let uvi = response.current.uvi;
 
-        console.log(temp);
-        console.log(humidity);
-        console.log(wind);
-        console.log(icon)
 
         //append temperature
         let node = document.createElement("H1");
@@ -49,6 +57,32 @@ let renderCurrentWeather = function() {
         node = document.createElement("P");
         textnode = document.createTextNode("Humidity: " + humidity + "%");
         node.appendChild(textnode);
+        dataContainer.appendChild(node);
+
+        //append UVI
+        node = document.createElement("P");
+
+        //Need a span for the title...
+        let titleSpanNode = document.createElement("SPAN");
+        textnode = document.createTextNode("UV Index: ");
+        titleSpanNode.appendChild(textnode);
+        node.appendChild(titleSpanNode);
+        
+        //...and for the dynamically colored UV Index
+        let colorSpanNode = document.createElement("SPAN");
+        if(uvi <= 4) {
+            colorSpanNode.style = "background-color: green; color: white; border-radius: 3px; padding: 2px"
+        } 
+        else if (uvi <=7 ) {
+            colorSpanNode.style = "background-color: orange; color: white; border-radius: 3px; padding: 2px"
+        }
+        else {
+            colorSpanNode.style = "background-color: red; color: white; border-radius: 3px; padding: 2px"
+        }
+        textnode = document.createTextNode(uvi);
+        colorSpanNode.appendChild(textnode);
+        node.appendChild(colorSpanNode);
+        
         dataContainer.appendChild(node);
 
         //append Icon
@@ -125,13 +159,14 @@ let renderFiveDayForecast = function () {
     })
 }
 
-let renderAllWeather = function() {
+let renderNewValues = function() {
     renderCurrentWeather();
     renderFiveDayForecast();
+    renderSearchedCities();
 }
 
-searchButton.addEventListener("click", renderAllWeather);
-searchBar.addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderAllWeather()})
+searchButton.addEventListener("click", renderNewValues);
+searchBar.addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderNewValues()})
 
 //Date functions
 let unixToDateTime = function(timestamp) {
@@ -151,6 +186,7 @@ let renderDate = function() {
 
 let init = function() {
     renderDate();
+    renderSearchedCities();
 }
 
 init();
