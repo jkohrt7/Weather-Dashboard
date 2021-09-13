@@ -20,7 +20,7 @@ let getWeatherData = function(cityName) {
         + coordinatesResponse[0].lat 
         + "&lon="
         + coordinatesResponse[0].lon
-        + "&appid=acdc16ce9b81fc931de962a6dfeeba4f";
+        + "&units=imperial&appid=acdc16ce9b81fc931de962a6dfeeba4f";
 
         //Use the API to return a Promise of the weather data.
         return fetch(requestUrl, {
