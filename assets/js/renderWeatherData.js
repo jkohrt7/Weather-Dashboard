@@ -6,6 +6,7 @@ let renderCurrentWeather = function() {
     let imageContainer = document.querySelector("#current-icon")
     dataContainer.innerHTML = ""; 
     imageContainer.innerHTML = "";
+    document.querySelector("#current-weather-styling").style = "visibility: visible";
 
     //add city name at top of container
     let city = document.querySelector("#search-bar").value;
@@ -80,7 +81,7 @@ let renderCurrentWeather = function() {
 let renderFiveDayForecast = function () {
     let forecastContainer = document.querySelector("#forecast-container");
     forecastContainer.innerHTML = "";
-    document.querySelector("#five-day-title").style = "visibility: visible";
+    document.querySelector("#forecast-styling").style = "visibility: visible";
 
     let city = document.querySelector("#search-bar").value;
     getWeatherData(city).then(function (response) {

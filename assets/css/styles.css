@@ -70,6 +70,11 @@ body {
     
 }
 
+#date-container {
+    font-size: large;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 850px){ 
     .primary-content {
         flex-direction: column;
@@ -93,7 +98,7 @@ body {
     padding-bottom: 3px;
     padding-top: 3px;
     justify-content: space-around;
-    overflow:scroll;
+    
 
     background: #375C89;
     box-shadow: inset 20px 20px 60px #a5afd9,
@@ -113,6 +118,7 @@ body {
 @media screen and (max-width: 850px) {
     .city-history {
         justify-content: flex-start;
+        overflow:scroll;
     }
 }
 
@@ -128,10 +134,13 @@ main {
     background: linear-gradient(145deg, #d0dcff, #afb9e6);
     padding: 10px;
     margin: 20px;
+
+    
 }
 
 #city-weather-container {
     /* border: 1px purple solid; */
+    align-items: center;
     padding: 1em;
 }
 
@@ -140,6 +149,8 @@ main {
     width: 13em;
     min-height: 10em;
     min-width: 250px;
+
+    visibility: hidden; /* dynamic */
 }
 
 #current-weather-styling h1 {
@@ -178,7 +189,7 @@ main {
 
 @media screen and (max-width: 850px) {
     #current-weather-styling {
-        margin-left: 3px;
+        
         width: 80%;
     }
 }
@@ -189,6 +200,8 @@ main {
     width: 80vw;
     min-width: 250px;
     padding: 10px;
+
+    visibility: hidden; /* dynamic */
 }
 
 #forecast-styling h2 {
@@ -223,7 +236,7 @@ main {
 @media screen and (max-width: 850px){
     #forecast-styling {
         width: 80%;
-        margin-left: 3px;
+        
     }
 
     #forecast-styling h4 {
