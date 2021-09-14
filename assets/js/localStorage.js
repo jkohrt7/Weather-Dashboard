@@ -58,6 +58,9 @@ let addCity = function() {
     if (cityArr.length >= 10) {
         cityArr = cityArr.slice(1);
     }
+    if (cityArr.includes(newCity)) {
+        return;
+    }
     cityArr.push(newCity);
 
     //add it back to localStorage
