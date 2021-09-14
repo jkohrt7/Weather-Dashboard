@@ -1,23 +1,4 @@
 //Contains functions that render weather data to the site.
-let currentWeatherContainer = document.querySelector("#current-weather-container");
-let cityNameElement = document.querySelector("#city-name");
-let searchButton = document.querySelector("#search-button");
-let searchBar = document.querySelector("#search-bar")
-
-
-//Uses local storage to populate bar with recent cities
-let renderSearchedCities = function() {
-    //get cities from localStorage into an array.
-
-    //loop through the cities
-
-    //add them as new li to .city-history
-};
-
-//Adds a city to local storage
-let addCityToLocalStorage = function() {
-    //
-}
 
 //Adds curr weather data from a weather response to the daily weather element
 let renderCurrentWeather = function() {
@@ -27,9 +8,9 @@ let renderCurrentWeather = function() {
     imageContainer.innerHTML = "";
 
     //add city name at top of container
-    let city = searchBar.value;
+    let city = document.querySelector("#search-bar").value;
     city = city.substring(0,1).toUpperCase() + city.substring(1);
-    cityNameElement.textContent = city;
+    document.querySelector("#city-name").textContent = city;
 
     //add data to container
     getWeatherData(city).then(function(response){
@@ -94,11 +75,12 @@ let renderCurrentWeather = function() {
 
 }
 
+//Adds forecast weather data from API response to the forecast container
 let renderFiveDayForecast = function () {
     let forecastContainer = document.querySelector("#forecast-container");
     forecastContainer.innerHTML = "";
 
-    let city = searchBar.value;
+    let city = document.querySelector("#search-bar").value;
     getWeatherData(city).then(function (response) {
         let forecastArray = response.daily;
         let highTemp;
@@ -159,14 +141,20 @@ let renderFiveDayForecast = function () {
     })
 }
 
+//Updates all necessary components when search is conducted
 let renderNewValues = function() {
     renderCurrentWeather();
     renderFiveDayForecast();
+    addCity();
     renderSearchedCities();
 }
 
-searchButton.addEventListener("click", renderNewValues);
-searchBar.addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderNewValues()})
+//Events triggered using enter or button
+document.querySelector("#search-button")
+        .addEventListener("click", renderNewValues);
+
+document.querySelector("#search-bar")
+        .addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderNewValues()})
 
 //Date functions
 let unixToDateTime = function(timestamp) {
