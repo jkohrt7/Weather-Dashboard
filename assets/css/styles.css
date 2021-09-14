@@ -2,10 +2,11 @@
 body {
     font-family: 'Ubuntu', sans-serif;
     line-height: 120%;
+    white-space: nowrap;
 }
 
 :root {
-    --main-color: navy;
+    --main-color: #0042A7;
     --secondary-color: lime;
 }
 
@@ -13,23 +14,24 @@ body {
 .header {
     display: flex; 
     flex-direction: column;
-    border: solid red 3px;
-    
+    /* border: solid red 3px; */
 }
 
-/* Top half of header */
+/* Search/Title/Time: Top half of header */
 .primary-content {
     display: flex;
-    border: solid green 3px;
+    color: white;
+    background-color: var(--main-color);
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
+    padding: 18px;
 }
 
 #title {
     font-weight: bolder;
     font-size: xx-large;
+    color: white;
 }
 
 #search-content {
@@ -38,32 +40,80 @@ body {
 }
 
 #search-content input {
-    font-size: 120%;
+    font-size: 120%; 
+    border: 1px solid black;
+}
+
+#search-content input:focus {
+    outline: none;
+    background-color: ghostwhite;
 }
 
 #search-button {
     height: 28px;
     width: 28px;
+    margin-left: -1px;
     background-image: url("../images/search.png");
     background-size: 15px 15px;
     background-repeat: no-repeat;
     background-position: center;
     border: 1px solid black;
+    border-left: none;
+    background-color: white;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-/* bottom half of header */
-
-.city-history {
-    display: flex;
-    padding-left: 1em;
-    border: solid orange 3px;
+#search-button:hover {
+    filter: zoom(150%);
+    cursor: pointer; 
+    
 }
 
-.city-history ::after {
-    content: "|";
-    padding: 1em;
+@media screen and (max-width: 850px){ 
+    .primary-content {
+        flex-direction: column;
+    }
+
+    #title {
+        margin-bottom: 15px;
+    }
+
+    #search-content {
+        margin-bottom: 10px;
+    }
+}
+
+/* History: bottom half of header */
+.city-history {
+    display: flex;
+    
+    border-bottom: solid var(--main-color) 2px;
+    background-color: #375C89;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    justify-content: space-around;
+    overflow:scroll;
+
+    background: #375C89;
+    box-shadow: inset 20px 20px 60px #a5afd9,
+            inset -20px -20px 60px #dfedff;
+    
+}
+
+.city-history li {
+    padding-left: 1em;
+}
+
+.city-history :hover {
+    cursor: pointer;
+    color:white;
+}
+
+@media screen and (max-width: 850px) {
+    .city-history {
+        justify-content: flex-start;
+    }
 }
 
 /* Main content */
@@ -72,15 +122,41 @@ main {
     flex-direction: column;
 }
 
+.info-card {
+    border: 2px solid #9AA8FF;
+    border-radius: 3px;
+    background: linear-gradient(145deg, #d0dcff, #afb9e6);
+    padding: 10px;
+    margin: 20px;
+}
+
 #city-weather-container {
-    border: 1px purple solid;
-    padding: 1em
+    /* border: 1px purple solid; */
+    padding: 1em;
+}
+
+/* Current weather contents */ 
+#current-weather-styling {
+    width: 13em;
+    min-height: 10em;
+    min-width: 250px;
+}
+
+#current-weather-styling h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+    padding: 10px 20px 20px 0px;
+}
+
+#current-weather-styling h2 {
+    font-size: large;
+    font-weight: bold;
 }
 
 #current-weather-container {
-
     display: flex;
     flex-direction: row;
+    white-space: nowrap;
     justify-content: space-between;
     padding-bottom: 1em;
 }
@@ -93,7 +169,81 @@ main {
     flex-grow: 1;
 }
 
+#current-icon img {
+    padding-right: 40px;
+    width: 120px;
+    height: 120px;
+}
+
+
+@media screen and (max-width: 850px) {
+    #current-weather-styling {
+        margin-left: 3px;
+        width: 80%;
+    }
+}
+
+/* Forecast contents */
+#forecast-styling {
+    white-space: nowrap;
+    width: 80vw;
+    min-width: 250px;
+    padding: 10px;
+}
+
+#forecast-styling h2 {
+    font-size: large;
+    font-weight: bold;
+    padding-bottom: 10px;
+
+}
+
+#forecast-styling h4 {
+    text-align: center;
+    font-size: large;
+}
+
+#forecast-styling img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+#forecast-styling p {
+    text-align: left;
+}
+
 #forecast-container {
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 850px){
+    #forecast-styling {
+        width: 80%;
+        margin-left: 3px;
+    }
+
+    #forecast-styling h4 {
+        text-align: center;
+        font-weight: bold;
+        
+    }
+
+    #forecast-container {
+        flex-direction: column;
+        text-align: center;
+        
+    }
+
+    #forecast-container div {
+        margin-bottom: 30px;
+    }
+
+
+    #forecast-container p {
+        text-align: center;
+    }
 }

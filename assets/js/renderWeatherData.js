@@ -70,7 +70,9 @@ let renderCurrentWeather = function() {
         node.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png"
         imageContainer.appendChild(node);
         
-    } )
+    } ).catch( (error) => {
+        console.log("Error: " + error);
+    });
 
 }
 
@@ -99,7 +101,7 @@ let renderFiveDayForecast = function () {
             icon = forecastArray[i].weather[0].icon;
             date = forecastArray[i].dt;
 
-            dayNode = document.createElement("h4");
+            dayNode = document.createElement("div");
 
             //add date
             let node = document.createElement("h4");
