@@ -101,7 +101,7 @@ let renderFiveDayForecast = function () {
 
             dayNode = document.createElement("h4");
 
-            //TODO add date
+            //add date
             let node = document.createElement("h4");
             let textnode = document.createTextNode(unixToDateTime(date).toLocaleString({weekday: 'long'}));
             node.appendChild(textnode);
@@ -149,12 +149,24 @@ let renderNewValues = function() {
     renderSearchedCities();
 }
 
-//Events triggered using enter or button
+//Events triggered using enter or button. Cannot be triggered more than once/sec to avoid fees.
 document.querySelector("#search-button")
-        .addEventListener("click", renderNewValues);
+        .addEventListener("click", () => {
+            if(Date.now() - apiDelay > 1000) {
+                renderNewValues();
+                apiDelay = Date.now();
+            }
+        });
 
 document.querySelector("#search-bar")
-        .addEventListener("keydown", (e) => {if ((e.code) == "Enter") renderNewValues()})
+        .addEventListener("keydown", (e) => {
+            if ((e.code) == "Enter") {
+                if(Date.now() - apiDelay > 1000) {
+                    renderNewValues();
+                    apiDelay = Date.now();
+                }
+            }
+        })
 
 //Date functions
 let unixToDateTime = function(timestamp) {

@@ -1,3 +1,5 @@
+let apiDelay = Date.now(); //global value limiting how often API calls can be made
+
 //Returns a Promise containing weather data given a city's name
 let getWeatherData = function(cityName) {
     //use the city's name to create a GET http request for the geo API endpoint

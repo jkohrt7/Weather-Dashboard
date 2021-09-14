@@ -1,8 +1,6 @@
 //Uses local storage to populate bar with recent cities
 let renderSearchedCities = function() {
-    //update localStorage first
     
-    //get cities from localStorage into an array.
     //get the cities from localStorage into an array
     let cityArr = window.localStorage.getItem("cityHistory");
     if(cityArr) {
@@ -23,9 +21,13 @@ let renderSearchedCities = function() {
         textnode = document.createTextNode(name);
 
         node.onclick = ()=> {
-            document.querySelector("#search-bar").value = cityArr[i];
-            renderCurrentWeather();
-            renderFiveDayForecast();
+            if(Date.now() - apiDelay > 1000) {
+                document.querySelector("#search-bar").value = cityArr[i];
+                renderCurrentWeather();
+                renderFiveDayForecast();
+                apiDelay = Date.now();
+            }
+            
         };
         
         node.appendChild(textnode);
