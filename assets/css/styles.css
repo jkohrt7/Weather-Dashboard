@@ -97,6 +97,7 @@ body {
     background-color: #375C89;
     padding-bottom: 3px;
     padding-top: 3px;
+    min-height: 20px;
     justify-content: left;
 
     background: #375C89;
