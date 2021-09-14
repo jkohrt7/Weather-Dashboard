@@ -158,7 +158,6 @@ let renderNewValues = function() {
     getWeatherData(document.querySelector("#search-bar").value).then((response) =>
         {
             if(response instanceof Error) {
-                console.log("renderNewValues error")
                 return;
             }
             else {
