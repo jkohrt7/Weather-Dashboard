@@ -11,7 +11,7 @@ let renderCurrentWeather = function() {
     let city = document.querySelector("#search-bar").value;
     city = city.substring(0,1).toUpperCase() + city.substring(1);
     document.querySelector("#city-name").textContent = city;
-
+    
     //add data to container
     getWeatherData(city).then(function(response){
         console.log(response);
@@ -20,7 +20,6 @@ let renderCurrentWeather = function() {
         let humidity = response.current.humidity;
         let icon = response.current.weather[0].icon;
         let uvi = response.current.uvi;
-
 
         //append temperature
         let node = document.createElement("H1");
@@ -79,6 +78,7 @@ let renderCurrentWeather = function() {
 let renderFiveDayForecast = function () {
     let forecastContainer = document.querySelector("#forecast-container");
     forecastContainer.innerHTML = "";
+    document.querySelector("#five-day-title").style = "visibility: visible";
 
     let city = document.querySelector("#search-bar").value;
     getWeatherData(city).then(function (response) {
