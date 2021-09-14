@@ -4,18 +4,22 @@
 let renderCurrentWeather = function() {
     let dataContainer = document.querySelector("#current-data");
     let imageContainer = document.querySelector("#current-icon")
-    dataContainer.innerHTML = ""; 
-    imageContainer.innerHTML = "";
-    document.querySelector("#current-weather-styling").style = "visibility: visible";
 
-    //add city name at top of container
+    
     let city = document.querySelector("#search-bar").value;
     city = city.substring(0,1).toUpperCase() + city.substring(1);
-    document.querySelector("#city-name").textContent = city;
-    
+
     //add data to container
     getWeatherData(city).then(function(response){
         console.log(response);
+
+        //Update HTML
+        dataContainer.innerHTML = ""; 
+        imageContainer.innerHTML = "";
+        document.querySelector("#city-name").textContent = city;
+        document.querySelector("#current-weather-styling").style = "visibility: visible";
+
+        //set values from response
         let temp = response.current.temp;
         let wind = response.current.wind_speed;
         let humidity = response.current.humidity;
@@ -80,11 +84,13 @@ let renderCurrentWeather = function() {
 //Adds forecast weather data from API response to the forecast container
 let renderFiveDayForecast = function () {
     let forecastContainer = document.querySelector("#forecast-container");
-    forecastContainer.innerHTML = "";
-    document.querySelector("#forecast-styling").style = "visibility: visible";
-
     let city = document.querySelector("#search-bar").value;
+
     getWeatherData(city).then(function (response) {
+        //Update html
+        forecastContainer.innerHTML = "";
+        document.querySelector("#forecast-styling").style = "visibility: visible";
+    
         let forecastArray = response.daily;
         let highTemp;
         let lowTemp;
@@ -141,7 +147,9 @@ let renderFiveDayForecast = function () {
 
             forecastContainer.appendChild(dayNode);
         }
-    })
+    }).catch( (error) => {
+        console.log("Error: " + error);
+    });
 }
 
 //Updates all necessary components when search is conducted
