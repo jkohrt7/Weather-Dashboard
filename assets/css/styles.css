@@ -26,6 +26,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 18px;
+
+
 }
 
 #title {
@@ -93,16 +95,13 @@ body {
 .city-history {
     display: flex;
     
-    border-bottom: solid var(--main-color) 2px;
-    background-color: #375C89;
+    background-color: #4c75a7;
     padding-bottom: 3px;
     padding-top: 3px;
     min-height: 20px;
     justify-content: left;
 
-    background: #375C89;
-    box-shadow: inset 20px 20px 60px #a5afd9,
-            inset -20px -20px 60px #dfedff;
+    box-shadow:  8px 6px 12px lightgrey;
     
 }
 
@@ -136,7 +135,7 @@ main {
     padding: 10px;
     margin: 20px;
 
-    
+    box-shadow: 8px 6px 12px lightgrey;
 }
 
 #city-weather-container {
