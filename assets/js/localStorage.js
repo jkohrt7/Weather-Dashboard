@@ -37,9 +37,8 @@ let renderSearchedCities = function() {
 };
 
 //Adds a city to local storage and to the 
-let addCity = function() {
-    let newCity = document.querySelector("#search-bar").value;
-    //make sure there's a value
+let addCity = function(newCity) {
+    //make sure there's a valid value
     if(!newCity){
         return;
     }

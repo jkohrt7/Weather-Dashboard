@@ -11,7 +11,10 @@ let renderCurrentWeather = function() {
 
     //add data to container
     getWeatherData(city).then(function(response){
-        console.log(response);
+        if(response instanceof Error) {
+            console.log("save me from error hell")
+            return;
+        }
 
         //Update HTML
         dataContainer.innerHTML = ""; 
@@ -75,8 +78,6 @@ let renderCurrentWeather = function() {
         node.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png"
         imageContainer.appendChild(node);
         
-    } ).catch( (error) => {
-        console.log("Error: " + error);
     });
 
 }
@@ -146,18 +147,30 @@ let renderFiveDayForecast = function () {
             dayNode.appendChild(node);
 
             forecastContainer.appendChild(dayNode);
-        }
-    }).catch( (error) => {
-        console.log("Error: " + error);
+        };
     });
-}
+};
 
 //Updates all necessary components when search is conducted
 let renderNewValues = function() {
-    renderCurrentWeather();
-    renderFiveDayForecast();
-    addCity();
-    renderSearchedCities();
+
+    //Only do something if the API call works.
+    getWeatherData(document.querySelector("#search-bar").value).then((response) =>
+        {
+            if(response instanceof Error) {
+                console.log("renderNewValues error")
+                return;
+            }
+            else {
+                renderCurrentWeather(); 
+                renderFiveDayForecast();
+                addCity(document.querySelector("#search-bar").value);
+                renderSearchedCities();
+            }
+        }
+    )
+
+
 }
 
 //Events triggered using enter or button. Cannot be triggered more than once/sec to avoid fees.
@@ -179,7 +192,7 @@ document.querySelector("#search-bar")
             }
         })
 
-//Date functions
+//Date functions (helpers)
 let unixToDateTime = function(timestamp) {
     let timeInMilliseconds = timestamp * 1000;
     let isoDate = new Date(timeInMilliseconds).toJSON();

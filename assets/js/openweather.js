@@ -15,8 +15,11 @@ let getWeatherData = function(cityName) {
         let dataPromise = response.json();
         return dataPromise;
     }).then(function(coordinatesResponse) {
-        
         //Use the promised lat and lon city values to create an API call to the onecall API endpoint
+        if (coordinatesResponse.length == 0) {
+            throw new Error;
+        }
+
         let requestUrl = "https://api.openweathermap.org/data/2.5/onecall?"
         + "lat="
         + coordinatesResponse[0].lat 
@@ -33,6 +36,9 @@ let getWeatherData = function(cityName) {
             let dataPromise = weatherResponse.json();
             return dataPromise;
         })
-    })
+    }).catch((error) =>  {
+        console.log("Error: Problem with API call--invalid city name.");
+        return error;
+    }) 
 }
 
