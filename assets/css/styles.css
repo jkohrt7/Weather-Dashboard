@@ -61,7 +61,7 @@ body {
     height: inherit;
     width: 1.6em;
     padding: 2px;
-    margin-left: -1px;
+    margin-left: -5px;
     background-image: url("../images/search.png");
     background-size: 15px 15px;
     background-repeat: no-repeat;
