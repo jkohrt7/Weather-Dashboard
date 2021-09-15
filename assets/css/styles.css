@@ -39,12 +39,15 @@ body {
 #search-content {
     display: flex;
     flex-wrap: nowrap;
+    height: 30px;
 }
 
 #search-content input {
     font-size: 120%; 
     height: inherit;
     border: 1px solid black;
+    padding: 2px;
+    margin: 0;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -57,6 +60,7 @@ body {
 #search-button {
     height: inherit;
     width: 1.6em;
+    padding: 2px;
     margin-left: -1px;
     background-image: url("../images/search.png");
     background-size: 15px 15px;
